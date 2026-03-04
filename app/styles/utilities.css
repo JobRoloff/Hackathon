@@ -1,0 +1,119 @@
+/* Material Design theme token utilities */
+
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 1.5rem;
+}
+
+.page__title {
+  color: var(--md-sys-color-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.page__meta {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.9375rem;
+  margin: 0 0 1rem;
+}
+
+.page__meta strong {
+  color: var(--md-sys-color-on-surface);
+}
+
+.card {
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.card--primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-color: var(--md-sys-color-primary);
+}
+
+.card__heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: inherit;
+}
+
+.card__body {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.section {
+  margin-top: 1.5rem;
+}
+
+.section__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  margin: 0 0 0.75rem;
+}
+
+.anomaly-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.anomaly-list__item {
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--md-sys-color-outline);
+  font-size: 0.9375rem;
+}
+
+.anomaly-list__item[data-severity="critical"] {
+  border-left-color: var(--md-sys-color-error);
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.anomaly-list__item[data-severity="warning"] {
+  border-left-color: var(--md-sys-color-tertiary);
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.anomaly-list__item[data-severity="info"] {
+  border-left-color: var(--md-sys-color-secondary);
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
