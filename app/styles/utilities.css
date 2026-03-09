@@ -1,0 +1,203 @@
+/* Material Design theme token utilities */
+
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 1.5rem;
+}
+
+.page__title {
+  color: var(--md-sys-color-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.page__meta {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.9375rem;
+  margin: 0 0 1rem;
+}
+
+.page__meta strong {
+  color: var(--md-sys-color-on-surface);
+}
+
+.card {
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.card--primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-color: var(--md-sys-color-primary);
+}
+
+.card__heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: inherit;
+}
+
+.card__body {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.section {
+  margin-top: 1.5rem;
+}
+
+.section__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  margin: 0 0 0.75rem;
+}
+
+.anomaly-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.anomaly-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--md-sys-color-outline);
+  font-size: 0.9375rem;
+}
+
+.anomaly-list__text {
+  flex: 1;
+}
+
+.anomaly-list__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.anomaly-list__icon-btn:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.anomaly-list__item[data-severity="critical"] {
+  border-left-color: var(--md-sys-color-error);
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.anomaly-list__item[data-severity="warning"] {
+  border-left-color: var(--md-sys-color-tertiary);
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.anomaly-list__item[data-severity="info"] {
+  border-left-color: var(--md-sys-color-secondary);
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 28rem;
+  width: 100%;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.modal__content {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.modal__list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.modal__list-item {
+  margin-bottom: 0.5rem;
+}
+
+.modal__list-item:last-child {
+  margin-bottom: 0;
+}
+
+.modal__close {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  opacity: 0.9;
+}
