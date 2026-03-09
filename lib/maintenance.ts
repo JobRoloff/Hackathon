@@ -7,9 +7,46 @@ import {
     MaintenanceAssessment,
     RobotSnapshot,
   } from '../types/robot'
+
+  // FastAPI: uvicorn api:app --host 0.0.0.0 --port 5000
+const PREDICT_API_URL = process.env.PREDICT_API_URL ?? 'http://127.0.0.1:5000/predict'
+
+  export interface JointPrediction {
+    jointId: number
+    currentA: number
+    temperatureC: number
+    currentStatus: 'ok' | 'warning' | 'critical'
+    temperatureStatus: 'ok' | 'warning'
+  }
+
+  export interface PredictionResult {
+    riskScore: number
+    predictedOutcome: 'ok' | 'warning' | 'critical'
+    joints: JointPrediction[]
+    jointsExceedingCurrent: number[]
+    jointsExceedingTemperature: number[]
+    /** When outcome is warning/critical but no joint exceeds limits, joints closest to current limit */
+    jointsOfConcern?: number[]
+  }
+
+  // TODO: this is calling the fastapi pytthon model
+  export async function predictOutcome(snapshot: RobotSnapshot): Promise<PredictionResult | null> {
+    try {
+      const res = await fetch(PREDICT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(snapshot),
+      })
+      console.log(res)
+      if (!res.ok) return null
+      return (await res.json()) as PredictionResult
+    } catch {
+      return null
+    }
+  }
   
-  const JOINT_CURRENT_MIN = -6
-  const JOINT_CURRENT_MAX = 6
+  const JOINT_CURRENT_MIN = -3
+  const JOINT_CURRENT_MAX = 3
   
   const JOINT_TEMP_MIN = 28
   const JOINT_TEMP_MAX = 45
@@ -17,15 +54,37 @@ import {
   const TOOL_CURRENT_MIN = 0.07
   const TOOL_CURRENT_MAX = 0.15
   
-  function predictOutcome(){
-    // TODO: use the python model
+  /** Merges multiple snapshots into one for assessment (e.g. after filtering). */
+  function mergeSnapshots(snapshots: RobotSnapshot[]): RobotSnapshot {
+    const nonEmpty = snapshots.filter(
+      (s) =>
+        s.jointCurrents.length > 0 ||
+        s.jointTemperatures.length > 0 ||
+        s.toolCurrent != null ||
+        s.faultFlags.length > 0,
+    )
+    if (nonEmpty.length === 0) {
+      return {
+        jointCurrents: [],
+        jointTemperatures: [],
+        toolCurrent: null,
+        faultFlags: [],
+      }
+    }
+    return {
+      jointCurrents: nonEmpty.flatMap((s) => s.jointCurrents),
+      jointTemperatures: nonEmpty.flatMap((s) => s.jointTemperatures),
+      toolCurrent: nonEmpty.map((s) => s.toolCurrent).filter(Boolean).slice(-1)[0] ?? null,
+      faultFlags: nonEmpty.flatMap((s) => s.faultFlags),
+    }
   }
 
-  // TODO: use prredictOutcome for the robot assessment
-  export function assessRobot(
+  // TODO: use predictOutcome for the robot assessment (e.g. add prediction to recommendation)
+  export async function assessRobot(
     robotId: string,
-    snapshot: RobotSnapshot,
-  ): MaintenanceAssessment {
+    snapshots: RobotSnapshot[],
+  ): Promise<MaintenanceAssessment> {
+    const snapshot = mergeSnapshots(snapshots)
     const anomalies: Anomaly[] = []
     const now = new Date().toISOString()
   
@@ -110,8 +169,8 @@ import {
     const recommendation =
       anomalies.length === 0
         ? 'No immediate issues detected. Continue normal operation and monitoring.'
-        : 'Review detected anomalies and schedule inspection before the next production window if possible.'
-  
+        : 'Review detected anomalies and schedule inspection before the next production window if possible. Click an anomaly for detailed recommendations.'
+
     return {
       robotId,
       generatedAt: now,
@@ -120,4 +179,5 @@ import {
     }
   }
   
+
   

@@ -91,6 +91,10 @@
 }
 
 .anomaly-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   background-color: var(--md-sys-color-surface-container);
   color: var(--md-sys-color-on-surface);
   padding: 0.75rem 1rem;
@@ -98,6 +102,28 @@
   margin-bottom: 0.5rem;
   border-left: 4px solid var(--md-sys-color-outline);
   font-size: 0.9375rem;
+}
+
+.anomaly-list__text {
+  flex: 1;
+}
+
+.anomaly-list__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.anomaly-list__icon-btn:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .anomaly-list__item[data-severity="critical"] {
@@ -116,4 +142,62 @@
   border-left-color: var(--md-sys-color-secondary);
   background-color: var(--md-sys-color-secondary-container);
   color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 28rem;
+  width: 100%;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.modal__content {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.modal__list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.modal__list-item {
+  margin-bottom: 0.5rem;
+}
+
+.modal__list-item:last-child {
+  margin-bottom: 0;
+}
+
+.modal__close {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  opacity: 0.9;
 }

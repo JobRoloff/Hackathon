@@ -1,2 +1,7 @@
 .next/
 node_modules/
+.env
+__pycache__/
+.venv/
+app/.DS_Store
+.DS_Store
